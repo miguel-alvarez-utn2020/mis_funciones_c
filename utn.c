@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <windows.h>
 #include <math.h>
+#include <unistd.h>
 
 static int esInt(char *cadena);
 static int getInt(int *pResultado);
@@ -13,6 +15,8 @@ static int getDni(char *pResultado);
 static int esDni(char *cadena);
 static int getText(char* pResultado);
 static int cargarAuto(int arr[], int size);
+int esPositivo(int valor);
+int esPar(int valor);
 
 /**
  * \brief Solicita un numero al usuario, leuego de verificarlo devuelve el resultado
@@ -298,7 +302,7 @@ int utn_cantidadPares(int arr[],int size, int* cantPares){
     if(arr != NULL && size > 0 && cantPares != NULL){
 
         for(i = 0; i < size; i++){
-            if(arr[i] % 2==0){
+            if(esPar(arr[i])){
                 aux ++;
                 retorno = 0;
             }
@@ -446,7 +450,7 @@ char* msjError,
 int minimo, 
 int maximo, 
 int reintentos, 
-bool automatico){
+int automatico){
     int retorno = -1;
     int i;
     int aux;
@@ -482,6 +486,131 @@ static int cargarAuto(int arr[], int size){
         retorno = 0;
     }
     return retorno;
+}
+/**
+ * @brief Calcula el descuento en porcentaje de un valor
+ * 
+ * @param valor puntero donde se va a guardar el resultado final
+ * @param descuento valor del descuento para ser procesado
+ * @return retorna -1 en caso de algun error, y 0 si todo salio bien
+ */
+int utn_calcDescuento(float* pResultado, float descuento, float valor){
+    int retorno = -1;
+    float buffer;
+    float aux;
+
+    if(pResultado != NULL && descuento > 0){
+        aux = valor;
+        buffer = aux - aux * descuento / 100;
+        retorno = 0;
+    }
+    *pResultado = buffer;
+    return retorno;
+}
+/**
+ * @brief 
+ * 
+ * @param valor 
+ * @param interes 
+ * @return int 
+ */
+int utn_calcInteres(float* pResultado, float interes, float valor){
+    int retorno = -1;
+    float buffer;
+    float aux;
+
+    if(pResultado != NULL && interes > 0){
+        aux = valor;
+        buffer = aux + aux * interes / 100;
+        retorno = 0;
+    }
+    *pResultado = buffer;
+    return retorno;
+}
+/**
+ * @brief 
+ * 
+ * @param bitCoin 
+ * @param pesos 
+ * @return int 
+ */
+int utn_pesosToBitCoin(float* bitCoin, float pesos, float precioBitCoin){
+
+    int retorno = -1;
+    float buffer;
+    if(bitCoin != NULL && pesos > 0){
+        buffer = pesos / precioBitCoin;
+        retorno = 0;
+    }
+    *bitCoin = buffer;
+    return retorno;
+}
+/**
+ * @brief 
+ * 
+ * @param pResultado 
+ * @param dividendo 
+ * @param divisor 
+ * @return int 
+ */
+int utn_volorUnidad(float* pResultado, float dividendo, float divisor){
+    int retorno = -1;
+    float buffer;
+    if(pResultado != NULL && dividendo > 0 && divisor > 0){
+        buffer = dividendo / divisor;
+        retorno = 0;
+    }
+    *pResultado = buffer;
+    return retorno;
+}
+/**
+ * @brief 
+ * 
+ * @param pResultado 
+ * @param valor1 
+ * @param valor2 
+ * @return int 
+ */
+int utn_diferenciaValores(float* pResultado, float valor1, float valor2){
+    int retorno = -1;
+    float buffer;
+    if(pResultado != NULL && valor1 > 0 && valor2 > 0){
+        if(valor1 > valor2){
+            buffer = valor1 - valor2;
+            retorno = 0;
+
+        }else{
+            buffer = valor2 - valor1;
+            retorno = 0;
+        }
+        
+    }
+    *pResultado = buffer;
+    return retorno;
+
+}
+/**
+ * @brief 
+ * 
+ * @param time 
+ * @param mensaje 
+ */
+void utn_loading(int time, char* mensaje){
+    printf("%s.",mensaje);
+    sleep(time);
+    system("cls");
+    printf("%s..",mensaje);
+    sleep(time);
+    system("cls");
+    printf("%s...",mensaje);
+    sleep(time);
+}
+void inicalizarAppVuelos(float* precio1, float* precio2, float* km, float* pUnitarioA, float* pUnitarioL){
+    *precio1 = 0;
+    *precio2 = 0;
+    *km = 0;
+    *pUnitarioA = 0;
+    *pUnitarioL = 0;
 }
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////--------VALIDADORES-----------////////////////////////
@@ -560,6 +689,22 @@ static int esDni(char *cadena)
             }
             i++;
         }
+    }
+    return retorno;
+}
+
+int esPar(int valor){
+    int retorno = 0;
+    if(valor % 2 == 0){
+        retorno = 1;
+    }
+    return retorno;
+}
+
+int esPositivo(int valor){
+    int retorno = 0;
+    if(valor > 0){
+        retorno = 1;
     }
     return retorno;
 }
