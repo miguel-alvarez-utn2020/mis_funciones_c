@@ -17,6 +17,7 @@ static int getText(char* pResultado);
 static int cargarAuto(int arr[], int size);
 int esPositivo(int valor);
 int esPar(int valor);
+int posLibre(int valor);
 
 /**
  * \brief Solicita un numero al usuario, leuego de verificarlo devuelve el resultado
@@ -260,10 +261,14 @@ int getText(char* pResultado){
 void utn_listarInt(int arr[], int size){
     int i;
     if(arr != NULL && size > 0){
+        
         for(i = 0; i < size; i++){
-            printf("%d\n", arr[i]);
+            if(arr[i] != -1){
+                printf("%d\n", arr[i]);
+            }
         }
     }
+
 }
 /**
  * @brief Suma todos los numero enteros que vienen detro del array
@@ -612,6 +617,70 @@ void inicalizarAppVuelos(float* precio1, float* precio2, float* km, float* pUnit
     *pUnitarioA = 0;
     *pUnitarioL = 0;
 }
+/**
+ * @brief 
+ * 
+ * @param arr 
+ * @param len 
+ * @return int 
+ */
+int utn_inicializarArrNumero(int arr[], int len ){
+    int i;
+    int retorno = 0;
+    int carga = -1;
+    if(arr != NULL){
+        for ( i = 0; i < len; i++)
+        {
+            arr[i] = carga;
+            retorno = 1;
+        }
+        
+    }
+    return retorno;
+}
+/**
+ * @brief 
+ * 
+ * @param arr 
+ * @param len 
+ * @return int 
+ */
+int utn_posLibreArr(int arr[], int len){
+    int i;
+    int retorno = -1;
+    int buffer;
+    if(arr != NULL && len > 0){
+        for ( i = 0; i < len; i++)
+        {   
+            if(posLibre(arr[i])){
+                buffer = i;
+                retorno = buffer;
+                printf("pos libre: %d\n", retorno);
+                break;
+            }
+        }
+
+    }
+    return retorno;
+}
+
+int utn_findArrNumber(int arr[], int len, int numero){
+    int i;
+    int retorno = -1;
+    int buffer;
+    if(arr != NULL && len > 0){
+        for ( i = 0; i < len; i++)
+        {
+            if(arr[i] == numero ){
+                buffer = i;
+                retorno = buffer;
+                break;
+            }
+        }
+        
+    }
+    return retorno;
+}
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////--------VALIDADORES-----------////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -638,6 +707,20 @@ static int esFloat(char *cadena)
         }
     }
 
+    return retorno;
+}
+
+/**
+ * @brief 
+ * 
+ * @param valor 
+ * @return int 
+ */
+int posLibre(int valor){
+    int retorno = 0;
+    if(valor == -1){
+        retorno = 1;
+    }
     return retorno;
 }
 

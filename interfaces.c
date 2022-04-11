@@ -50,6 +50,19 @@ void subMenu(){
     printf("|---------------------------------|\n");
 }
 
+void cargarArr(){
+    printf("|---------------------------------|\n");
+    printf("|-----------Cargar arr------------|\n");
+    printf("|---------------------------------|\n");
+    printf("|---------------------------------|\n");
+    printf("|  1-> cargar numero arr.	  |\n");
+    printf("|  2-> edirtar numero arr.	  |\n");
+    printf("|  3-> eliminar numero arr.	  |\n");
+    printf("|  4-> listar numeros.		  |\n");
+    printf("|  5-> salir.			  |\n");
+    printf("|---------------------------------|\n");
+}
+
 void informe(
             char* mensaje,
             float precio,
@@ -68,5 +81,7 @@ void informe(
     }
    
 }
+
+
 
 

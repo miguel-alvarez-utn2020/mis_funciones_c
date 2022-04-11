@@ -30,5 +30,7 @@ int utn_volorUnidad(float* pResultado, float dividendo, float divisor);
 int utn_diferenciaValores(float* pResultado, float valor1, float valor2);
 void utn_loading(int time, char* mensaje);
 void inicalizarAppVuelos(float* precio1, float* precio2, float* km, float* pUnitarioA, float* pUnitarioL);
-
+int utn_inicializarArrNumero(int arr[], int len );
+int utn_posLibreArr(int arr[], int len);
+int utn_findArrNumber(int arr[], int len, int numero);
 #endif /* UTN_H_ */
